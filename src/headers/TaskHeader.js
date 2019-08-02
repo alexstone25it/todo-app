@@ -1,6 +1,6 @@
 import React from "react";
 
-function TodoHeader(props) {
+function TaskHeader(props) {
   let todoTitle = "col-12";
   if (props.stricken) {
     todoTitle += " line";
@@ -13,4 +13,4 @@ function TodoHeader(props) {
   );
 }
 
-export default TodoHeader;
+export default TaskHeader;

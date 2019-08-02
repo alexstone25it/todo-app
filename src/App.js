@@ -2,15 +2,12 @@ import React from "react";
 
 import "./App.css";
 
-import PrimaryHeader from "./headers/PrimaryHeader";
-import TodoComponent from "./todo/TodoComponent";
+import MainComponent from "./mainComponents/MainComponent";
 
 function App() {
   return (
-    <div className="App container-fluid">
-      <PrimaryHeader />
-
-      <TodoComponent />
+    <div className="App">
+      <MainComponent />
     </div>
   );
 }

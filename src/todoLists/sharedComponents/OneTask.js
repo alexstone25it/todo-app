@@ -1,32 +1,34 @@
 import React, { Component } from "react";
 
-import TodoHeader from "../headers/TodoHeader";
+import TaskHeader from "../../headers/TaskHeader";
 
-class OneTodo extends Component {
+class OneTask extends Component {
   constructor(props) {
     super(props);
     this.onClickHandler = this.onClickHandler.bind(this);
   }
   onClickHandler(event) {
     const value = event.target.value;
-    const id = this.props.todoInfo.id;
-    this.props.todoClicked(id, value);
+    const id = this.props.taskInfo.id;
+    this.props.taskClicked(id, value);
   }
   render() {
     return (
       <section className="container">
-        <TodoHeader stricken={this.props.todoInfo.done}>
-          {this.props.todoInfo.title}
-        </TodoHeader>
+        <TaskHeader stricken={this.props.taskInfo.done}>
+          {this.props.taskInfo.title}
+        </TaskHeader>
         <div className="row">
           <span className="col-4">
-            <button
-              value="done"
-              onClick={this.onClickHandler}
-              className="btn btn-outline-success"
-            >
-              done
-            </button>
+            {!this.props.taskInfo.done ? (
+              <button
+                value="done"
+                onClick={this.onClickHandler}
+                className="btn btn-outline-success"
+              >
+                done
+              </button>
+            ) : null}
           </span>
           <span className="col-4">
             <button
@@ -52,4 +54,4 @@ class OneTodo extends Component {
   }
 }
 
-export default OneTodo;
+export default OneTask;
