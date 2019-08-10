@@ -1,8 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
-import PrimaryHeader from "../headers/PrimaryHeader";
-import AddToTodoMenu from "../todoLists/sharedComponents/AddToTodoMenu";
-import DisplayComponent from "../mainComponents/DisplayComponent";
+import { Container } from "reactstrap";
+
+import PrimaryHeader from "../shared/headers/PrimaryHeader";
+import AddTodoMenu from "../shared/todoodleComponents/addTodo/AddTodoMenu";
+import NavbarComponent from "../shared/navbar/NavbarComponent";
+import TodoodleComponent from "../mainComponents/TodoodleComponent";
 
 class MainComponent extends Component {
   constructor(props) {
@@ -10,11 +13,14 @@ class MainComponent extends Component {
   }
   render() {
     return (
-      <div className="container-fluid">
-        <PrimaryHeader />
-        <AddToTodoMenu />
-        <DisplayComponent />
-      </div>
+      <Fragment>
+        <NavbarComponent />
+        <Container>
+          <PrimaryHeader />
+          <AddTodoMenu />
+          <TodoodleComponent />
+        </Container>
+      </Fragment>
     );
   }
 }

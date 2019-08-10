@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import AccordionWrapper from "../../shared/accordion/AccordionWrapper";
+import Task from "./Task";
 
-import OneTask from "./sharedComponents/OneTask";
-
-const uuidv4 = require("uuid/v4");
+const uuid = require("uuid/v4");
 
 class TaskComponent extends Component {
   constructor(props) {
@@ -10,24 +10,27 @@ class TaskComponent extends Component {
     this.state = {
       tasks: [
         { id: "1", title: "Make apps to fill portfolio", done: false },
-        { id: "2", title: "Make 'em spiffy and awesome!", done: false },
+        { id: "2", title: "Make spiffy and awesome!", done: false },
         { id: "3", title: "Make portfolio", done: false }
       ],
-      isShowing: false
+      accordionOpen: false
     };
-    this.toggleIsShowing = this.toggleIsShowing.bind(this);
+    this.toggleAccordionHandler = this.toggleAccordionHandler.bind(this);
     this.taskClicked = this.taskClicked.bind(this);
   }
-  toggleIsShowing() {
+  toggleAccordionHandler(evt) {
     this.setState(prevState => ({
       ...prevState,
-      isShowing: !prevState.isShowing
+      accordionOpen: !prevState.accordionOpen
     }));
   }
   taskClicked(id, value) {
     switch (value) {
       case "done":
         this.clickDone(id);
+        break;
+      case "undoDone":
+        this.clickUndoDone(id);
         break;
       case "edit":
         this.clickEdit(id);
@@ -46,11 +49,22 @@ class TaskComponent extends Component {
         task.id === id ? (task.done = true) : task
       )
     }));
-    console.log("add in an undo!!!");
+  }
+
+  clickUndoDone(id) {
+    const newTask = Object.assign({}, this.state.tasks[id - 1]);
+    newTask.done = false;
+    const newTasks = [...this.state.tasks];
+    newTasks.splice(id - 1, 1, newTask);
+    this.setState(prevState => ({
+      ...prevState,
+      tasks: newTasks
+    }));
   }
   clickEdit(id) {
     console.log(id, "this is edit");
   }
+
   clickDelete(id) {
     this.setState(prevState => ({
       ...prevState,
@@ -58,31 +72,20 @@ class TaskComponent extends Component {
     }));
   }
   render() {
-    const closed = { maxHeight: "0", overflow: "hidden" };
-    const open = { display: "flex", overflow: "visible" };
+    const listTitle = "Tasks";
+    const listNum = this.state.tasks.length;
     const taskList = this.state.tasks.map(task => (
-      <OneTask key={uuidv4()} taskInfo={task} taskClicked={this.taskClicked} />
+      <Task key={uuid()} taskInfo={task} taskClicked={this.taskClicked} />
     ));
     return (
-      <div className="accordion">
-        <div className="card">
-          <div className="card-header">
-            <header>
-              <h3>
-                <button className="btn" onClick={this.toggleIsShowing}>
-                  Tasks
-                </button>
-                <span className="badge badge-pill badge-danger">4</span>
-              </h3>
-            </header>
-          </div>
-          <div style={this.state.isShowing ? open : closed}>
-            <div className="card-body">
-              <ul>{taskList}</ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AccordionWrapper
+        toggleAccordion={this.toggleAccordionHandler}
+        accordionOpen={this.state.accordionOpen}
+        listTitle={listTitle}
+        listNum={listNum}
+      >
+        <ul className="list-group">{taskList}</ul>
+      </AccordionWrapper>
     );
   }
 }
