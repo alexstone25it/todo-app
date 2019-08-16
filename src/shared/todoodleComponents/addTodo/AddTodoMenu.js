@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 
+import { connect } from "react-redux";
+
 import { Row, DropdownItem } from "reactstrap";
 
 import DropdownComponent from "../../dropdowns/DropdownComponent";
-
 import AddTodoModal from "../../modals/AddTodoModal";
 import AddTodoForm from "./AddTodoForm";
 
-import { TODOODLES_ADDED } from "../../../DATA/TODOODLES_ADDED";
 const uuid = require("uuid/v4");
 
 class AddTodoMenu extends Component {
@@ -15,7 +15,7 @@ class AddTodoMenu extends Component {
     super(props);
     this.state = {
       modalOpen: false,
-      addonSelected: ""
+      addonSelected: "tasks"
     };
     this.toggleModalHandler = this.toggleModalHandler.bind(this);
     this.addonClickedHandler = this.addonClickedHandler.bind(this);
@@ -35,7 +35,7 @@ class AddTodoMenu extends Component {
     }));
   }
   render() {
-    const addonArray = TODOODLES_ADDED.map(addon => (
+    const addonArray = this.props.userAddons.map(addon => (
       <DropdownItem
         key={uuid()}
         value={addon}

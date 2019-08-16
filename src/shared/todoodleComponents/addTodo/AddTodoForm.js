@@ -28,6 +28,7 @@ class AddTodoForm extends Component {
 
     return (
       <Form>
+        <AddTaskForm />
         <FormGroup>
           <DayPicker
             onDayClick={this.handleDayClick}

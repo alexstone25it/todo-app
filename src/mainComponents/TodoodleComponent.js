@@ -3,9 +3,9 @@ import "./TodoodleComponent.css";
 
 import { Row, Col, Table, Button, Badge } from "reactstrap";
 
-import ShoppingComponent from "../todoodleAdditions/shopping/ShoppingComponent";
-import TaskComponent from "../todoodleAdditions/tasks/TaskComponent";
-import RotaComponent from "../todoodleAdditions/rota/RotaComponent";
+import ShoppingComponent from "../todoodleAddons/shopping/ShoppingComponent";
+import TaskComponent from "../todoodleAddons/tasks/TaskComponent";
+import RotaComponent from "../todoodleAddons/rota/RotaComponent";
 
 class TodosComponent extends Component {
   constructor(props) {

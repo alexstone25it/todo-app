@@ -7,22 +7,38 @@ import AddTodoMenu from "../shared/todoodleComponents/addTodo/AddTodoMenu";
 import NavbarComponent from "../shared/navbar/NavbarComponent";
 import TodoodleComponent from "../mainComponents/TodoodleComponent";
 
+import { connect } from "react-redux";
+import { fetchUserAddons } from "../REDUX/actionCreators/userAddonsCreator";
+
 class MainComponent extends Component {
   constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    this.loadUserAddons();
+  }
+  loadUserAddons() {
+    this.props.fetchUserAddons();
+  }
+
   render() {
     return (
       <Fragment>
         <NavbarComponent />
         <Container>
           <PrimaryHeader />
-          <AddTodoMenu />
+          <AddTodoMenu userAddons={this.props.userAddons} />
           <TodoodleComponent />
         </Container>
       </Fragment>
     );
   }
 }
-
-export default MainComponent;
+const mapStateToProps = state => ({
+  userAddons: state.userAddons
+});
+const mapDispatchToProps = { fetchUserAddons };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainComponent);
