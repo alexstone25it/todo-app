@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import {
-  fetchFamilyData,
-  fetchUserData
-} from "../../../REDUX/actionCreators/userCreator";
+import { fetchUserData } from "../../../REDUX/actionCreators/userCreator";
+import { fetchFamilyData } from "../../../REDUX/actionCreators/familyCreator";
 
 import "./LandingPage.css";
 
@@ -46,7 +44,7 @@ class LandingPage extends Component {
     const username = this.state.username.toLowerCase();
     const familyname = this.state.familyname.toLowerCase();
     const password = this.state.password;
-    this.props.fetchFamilyData(familyname, username);
+    this.props.fetchFamilyData(familyname);
     this.props.fetchUserData(familyname, username);
   }
   render() {
@@ -66,8 +64,8 @@ class LandingPage extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchFamilyData,
-  fetchUserData
+  fetchUserData,
+  fetchFamilyData
 };
 
 export default connect(

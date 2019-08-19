@@ -17,12 +17,14 @@ class MainComponent extends Component {
     console.log(this.props);
   }
   render() {
+    const user = this.props.user;
+    const addons = ["shopping", "tasks", "rota"];
     return (
       <Fragment>
         <NavbarComponent />
         <Container>
-          <PrimaryHeader />
-          <AddTodoMenu userAddons={this.props.userAddons} />
+          <PrimaryHeader user={user} />
+          <AddTodoMenu userAddons={addons} />
           <TodoodleComponent />
         </Container>
       </Fragment>
@@ -30,12 +32,14 @@ class MainComponent extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user,
-  familyname: state.familyname,
-  userObj: state.userObj,
-  familyObj: state.familyObj
-});
+const mapStateToProps = state => {
+  return {
+    user: state.user.username,
+    family: state.user.familyname,
+    userObj: state.user.userObj,
+    familyObj: state.family.familyObj
+  };
+};
 
 export default connect(
   mapStateToProps,

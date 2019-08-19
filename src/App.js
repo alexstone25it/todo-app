@@ -23,7 +23,9 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  isAuth: state.isAuth
-});
+const mapStateToProps = state => {
+  return {
+    isAuth: state.user.isAuth
+  };
+};
 export default connect(mapStateToProps)(App);
