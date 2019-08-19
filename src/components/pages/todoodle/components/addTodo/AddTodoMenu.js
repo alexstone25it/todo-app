@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from "react";
 
-import { connect } from "react-redux";
-
 import { Row, DropdownItem } from "reactstrap";
 
-import DropdownComponent from "../../dropdowns/DropdownComponent";
-import AddTodoModal from "../../modals/AddTodoModal";
+import DropdownComponent from "../../../../shared/dropdowns/DropdownComponent";
+import AddTodoModal from "../../../../shared/modals/AddTodoModal";
 import AddTodoForm from "./AddTodoForm";
 
 const uuid = require("uuid/v4");

@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-import { userAddonsReducer } from "../reducers/addonsReducer";
+import { userReducer } from "../reducers/userReducer";
 
 const rootReducer = combineReducers({
-  userAddons: userAddonsReducer
+  user: userReducer
 });
 
 const configureStore = (initialState = {}) => {

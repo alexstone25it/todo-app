@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col, Table } from "reactstrap";
-import AccordionWrapper from "../../shared/accordion/AccordionWrapper";
+import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
+
 const uuid = require("uuid/v4");
+
 class Rota extends Component {
   constructor(props) {
     super(props);

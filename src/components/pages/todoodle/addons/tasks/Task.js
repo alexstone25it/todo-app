@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col, Button, ListGroupItem } from "reactstrap";
 
-import StrikeThrough from "../../shared/StrikeThrough";
+import StrikeThrough from "../../components/strikeThrough/StrikeThrough";
 
-import AccordionWrapper from "../../shared/accordion/AccordionWrapper";
+import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
 
 class Task extends Component {
   constructor(props) {

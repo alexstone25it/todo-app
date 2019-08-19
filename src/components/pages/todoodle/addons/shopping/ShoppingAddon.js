@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+
 import { Button } from "reactstrap";
-import AccordionWrapper from "../../shared/accordion/AccordionWrapper";
-import StrikeThrough from "../../shared/StrikeThrough";
-import { SmallBadge } from "../../shared/buttons/Badges";
+
+import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
+import StrikeThrough from "../../components/strikeThrough/StrikeThrough";
+import { SmallBadge } from "../../../../shared/buttons/Badges";
+
 const uuid = require("uuid/v4");
 
-class ShoppingComponent extends Component {
+class ShoppingAddon extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,4 +74,4 @@ class ShoppingComponent extends Component {
   }
 }
 
-export default ShoppingComponent;
+export default ShoppingAddon;

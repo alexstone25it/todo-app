@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import AccordionWrapper from "../../shared/accordion/AccordionWrapper";
-import Rota from "../rota/Rota";
+
+import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
+import Rota from "./Rota";
+
 const uuid = require("uuid/v4");
 
-class RotaComponent extends Component {
+class RotaAddon extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,4 +65,4 @@ class RotaComponent extends Component {
   }
 }
 
-export default RotaComponent;
+export default RotaAddon;

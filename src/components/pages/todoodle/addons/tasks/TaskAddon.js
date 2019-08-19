@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import AccordionWrapper from "../../shared/accordion/AccordionWrapper";
+import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
 import Task from "./Task";
 
 const uuid = require("uuid/v4");
 
-class TaskComponent extends Component {
+class TaskAddon extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,4 +90,4 @@ class TaskComponent extends Component {
   }
 }
 
-export default TaskComponent;
+export default TaskAddon;

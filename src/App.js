@@ -1,31 +1,29 @@
 import React, { Component } from "react";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+
+import { connect } from "react-redux";
 
 import "./App.css";
 
-import MainComponent from "./mainComponents/MainComponent";
-import LandingPage from "./mainComponents/LandingPage";
+import MainComponent from "./components/pages/main/MainComponent";
+import LandingPage from "./components/pages/landing/LandingPage";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userName: undefined
-    };
   }
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/:user" component={MainComponent} />
-          </Switch>
+          {this.props.isAuth ? <MainComponent /> : <LandingPage />}
         </div>
       </BrowserRouter>
     );
   }
 }
-
-export default App;
+const mapStateToProps = state => ({
+  isAuth: state.isAuth
+});
+export default connect(mapStateToProps)(App);
