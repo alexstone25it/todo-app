@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
+
 import { fetchUserData } from "../../../REDUX/actionCreators/userCreator";
 import { fetchFamilyData } from "../../../REDUX/actionCreators/familyCreator";
 
 import "./LandingPage.css";
 
-import { Container } from "reactstrap";
+import { Container, Row, Button } from "reactstrap";
 
 import PrimaryHeader from "../../shared/headers/PrimaryHeader";
 import LoginForm from "../../forms/LoginForm";
@@ -58,6 +59,14 @@ class LandingPage extends Component {
           onInput={this.onInputHandler}
           onSubmit={this.onSubmitHandler}
         />
+        <Row className="justify-content-center mt-4">
+          <p className="text-center">Not a user yet?</p>
+        </Row>
+        <Row className="justify-content-center">
+          <Button outline color="light">
+            Sign up
+          </Button>
+        </Row>
       </Container>
     );
   }

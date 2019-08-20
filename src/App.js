@@ -10,10 +10,10 @@ import MainComponent from "./components/pages/main/MainComponent";
 import LandingPage from "./components/pages/landing/LandingPage";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
+    console.log(
+      "you are in the addtodoForm about to put the user inputs from taskform, shoppingform and rotaform through redux and into firebase"
+    );
     return (
       <BrowserRouter>
         <div className="App">

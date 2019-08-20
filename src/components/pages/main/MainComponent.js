@@ -8,24 +8,27 @@ import PrimaryHeader from "../../shared/headers/PrimaryHeader";
 import AddTodoMenu from "../todoodle/components/addTodo/AddTodoMenu";
 import NavbarComponent from "../../shared/navbar/NavbarComponent";
 import TodoodleComponent from "../todoodle/TodoodleComponent";
+import Blob from "../../shared/spinners/Blob";
 
 class MainComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    console.log(this.props);
-  }
   render() {
-    const user = this.props.user;
-    const addons = ["shopping", "tasks", "rota"];
     return (
       <Fragment>
         <NavbarComponent />
         <Container>
-          <PrimaryHeader user={user} />
-          <AddTodoMenu userAddons={addons} />
-          <TodoodleComponent />
+          {this.props.familyLoading || this.props.userLoading ? (
+            <Blob />
+          ) : (
+            <Fragment>
+              <PrimaryHeader user={this.props.username} />
+              <AddTodoMenu
+                userAddons={Array.from(
+                  this.props.familyObj.addons.concat(this.props.userObj.addons)
+                )}
+              />
+              <TodoodleComponent />
+            </Fragment>
+          )}
         </Container>
       </Fragment>
     );
@@ -34,13 +37,14 @@ class MainComponent extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user.username,
-    family: state.user.familyname,
+    username: state.user.username,
+    familyname: state.user.familyname,
     userObj: state.user.userObj,
-    familyObj: state.family.familyObj
+    userLoading: state.user.isLoading,
+    familyObj: state.family.familyObj,
+    familyLoading: state.family.isLoading
   };
 };
-
 export default connect(
   mapStateToProps,
   null

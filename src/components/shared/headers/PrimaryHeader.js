@@ -9,10 +9,9 @@ function PrimaryHeader({ user }) {
   } else {
     title = capitalFirstLetter(user) + "'s";
   }
-
   return (
     <header className="row">
-      <h1 className="col-12 text-center">{title} Todoodle</h1>
+      <h1 className="col-12 text-center lightText">{title} Todoodle</h1>
     </header>
   );
 }

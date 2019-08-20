@@ -1,20 +1,33 @@
-import { ADD_USER_DATA, ADD_USER_SUCCESS } from "../actionTypes";
+import {
+  ADD_USER_DATA,
+  USER_DATA_LOADING,
+  ADD_USER_SUCCESS
+} from "../actionTypes";
 
 const initialState = {
+  isAuth: false,
+  isLoading: true,
+  errMess: null,
   username: "",
   familyname: "",
-  userObj: {},
-  isAuth: false
+  userObj: {}
 };
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER_DATA:
-      console.log(action.payload);
       return {
         ...state,
+        isLoading: false,
+        errMess: null,
         userObj: action.payload
       };
-
+    case USER_DATA_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+        errMess: null,
+        familyObj: {}
+      };
     case ADD_USER_SUCCESS:
       return {
         ...state,

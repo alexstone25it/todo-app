@@ -1,7 +1,11 @@
 .LandingPage {
-  widows: 100%;
+  width: 100%;
   height: 100vh;
-}
-.LandingPage {
+
   color: white;
+
+  padding-top: 3rem;
+}
+.LandingPage header {
+  margin-bottom: 2rem;
 }

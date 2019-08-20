@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 
 import { userReducer } from "../reducers/userReducer";
 import { familyReducer } from "../reducers/familyReducer";
+import { addTodoReducer } from "../reducers/addTodoReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
-  family: familyReducer
+  family: familyReducer,
+  addTodos: addTodoReducer
 });
 
 const configureStore = () => {

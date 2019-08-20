@@ -2,8 +2,12 @@ import React, { Component, Fragment } from "react";
 
 import { Row, DropdownItem } from "reactstrap";
 
+import { connect } from "react-redux";
+
+import { addAddonTargeted } from "../../../../../REDUX/actionCreators/addTodoCreator";
+
 import DropdownComponent from "../../../../shared/dropdowns/DropdownComponent";
-import AddTodoModal from "../../../../shared/modals/AddTodoModal";
+import AddTodoModal from "./AddTodoModal";
 import AddTodoForm from "./AddTodoForm";
 
 const uuid = require("uuid/v4");
@@ -13,18 +17,18 @@ class AddTodoMenu extends Component {
     super(props);
     this.state = {
       modalOpen: false,
-      addonSelected: "tasks"
+      addonTargeted: ""
     };
     this.toggleModalHandler = this.toggleModalHandler.bind(this);
     this.addonClickedHandler = this.addonClickedHandler.bind(this);
   }
   addonClickedHandler(value) {
-    console.log(value);
+    const addonTargeted = value;
     this.setState(prevState => ({
       ...prevState,
-      modalOpen: true,
-      addonSelected: value
+      modalOpen: true
     }));
+    this.props.addAddonTargeted(addonTargeted);
   }
   toggleModalHandler() {
     this.setState(prevState => ({
@@ -33,7 +37,8 @@ class AddTodoMenu extends Component {
     }));
   }
   render() {
-    const addonArray = this.props.userAddons.map(addon => (
+    const addons = Array.from(new Set(this.props.userAddons));
+    const addonArray = addons.map(addon => (
       <DropdownItem
         key={uuid()}
         value={addon}
@@ -47,9 +52,9 @@ class AddTodoMenu extends Component {
         <AddTodoModal
           toggleModal={this.toggleModalHandler}
           modalOpen={this.state.modalOpen}
-          addonSelected={this.state.addonSelected}
+          addonSelected={this.props.addonTargeted}
         >
-          <AddTodoForm addonSelected={this.state.addonSelected} />
+          <AddTodoForm />
         </AddTodoModal>
         <Row>
           <DropdownComponent
@@ -63,5 +68,15 @@ class AddTodoMenu extends Component {
     );
   }
 }
-
-export default AddTodoMenu;
+const mapStateToProps = state => {
+  return {
+    addonTargeted: state.addTodos.addonTargeted
+  };
+};
+const mapDispatchToProps = {
+  addAddonTargeted
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddTodoMenu);

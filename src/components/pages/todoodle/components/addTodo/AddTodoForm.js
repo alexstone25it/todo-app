@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
-import { Form, FormGroup } from "reactstrap";
-import AddShoppingForm from "../../../../forms/AddShoppingForm";
-import AddTaskForm from "../../../../forms/AddTaskForm";
-import AddRotaForm from "../../../../forms/AddRotaForm";
+import { connect } from "react-redux";
 
+import { Form, FormGroup } from "reactstrap";
+import AddToShoppingForm from "../../../../forms/AddToShoppingForm";
+import AddToTasksForm from "../../../../forms/AddToTasksForm";
+import AddToRotaForm from "../../../../forms/AddToRotaForm";
+import Blob from "../../../../shared/spinners/Blob";
 import DayPicker from "react-day-picker";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 
@@ -19,17 +21,28 @@ class AddTodoForm extends Component {
   handleDayClick(day) {
     this.setState({ selectedDay: day });
   }
-
+  formToRender(addonTargeted) {
+    switch (addonTargeted) {
+      case "shopping": {
+        return <AddToShoppingForm />;
+      }
+      case "tasks": {
+        return <AddToTasksForm />;
+      }
+      case "rota": {
+        return <AddToRotaForm />;
+      }
+      default: {
+        return <Blob />;
+      }
+    }
+  }
   render() {
-    const addon = this.props.addonSelected;
-    console.log(
-      addon,
-      "you stopped at connecting up the different addforms for each todoodle in the addTodoForm!"
-    );
-
+    const addonTargeted = this.props.addonTargeted;
+    const renderedForm = this.formToRender(addonTargeted);
     return (
       <Form>
-        <AddTaskForm />
+        {renderedForm}
         <FormGroup>
           <DayPicker
             onDayClick={this.handleDayClick}
@@ -40,5 +53,12 @@ class AddTodoForm extends Component {
     );
   }
 }
-
-export default AddTodoForm;
+const mapStateToProps = state => {
+  return {
+    addonTargeted: state.addTodos.addonTargeted
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(AddTodoForm);

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 import { FormGroup, Label, Input } from "reactstrap";
 
-function AddTaskForm(props) {
+function AddToTasksForm(props) {
   return (
     <Fragment>
       <FormGroup>
@@ -16,4 +16,4 @@ function AddTaskForm(props) {
     </Fragment>
   );
 }
-export default AddTaskForm;
+export default AddToTasksForm;

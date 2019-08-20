@@ -9,6 +9,9 @@ export const fetchUserData = (familyname, username) => dispatch =>
     .then(data => dispatch(addUserData(data)))
     .then(() => dispatch(addUserSuccess(familyname, username)));
 
+export const userDataLoading = () => ({
+  type: actionTypes.USER_DATA_LOADING
+});
 export const addUserData = data => ({
   type: actionTypes.ADD_USER_DATA,
   payload: data

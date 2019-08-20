@@ -8,9 +8,6 @@ import TaskAddon from "./addons/tasks/TaskAddon";
 import RotaAddon from "./addons/rota/RotaAddon";
 
 class TodosComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <main className="container-fluid p-0 TodoodleComponent">
