@@ -6,17 +6,17 @@ export const fetchUserData = (familyname, username) => dispatch =>
   axiosBase
     .get(`/${familyname}/${username}.json`)
     .then(response => response.data)
-    .then(data => dispatch(addUserData(data)))
-    .then(() => dispatch(addUserSuccess(familyname, username)));
+    .then(data => dispatch(addUserSettings(data)))
+    .then(() => dispatch(addUserSuccess(username)));
 
 export const userDataLoading = () => ({
   type: actionTypes.USER_DATA_LOADING
 });
-export const addUserData = data => ({
-  type: actionTypes.ADD_USER_DATA,
+export const addUserSettings = data => ({
+  type: actionTypes.ADD_USER_SETTINGS,
   payload: data
 });
-export const addUserSuccess = (familyname, username) => ({
+export const addUserSuccess = username => ({
   type: actionTypes.ADD_USER_SUCCESS,
-  payload: [familyname, username]
+  payload: username
 });

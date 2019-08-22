@@ -9,25 +9,28 @@ class DropdownComponent extends Component {
       dropdownOpen: false
     };
     this.toggleHandler = this.toggleHandler.bind(this);
-    this.addonClicked = this.addonClicked.bind(this);
+    this.targetClicked = this.targetClicked.bind(this);
   }
   toggleHandler() {
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }));
   }
-  addonClicked(event) {
+  targetClicked(event) {
     let value = event.target.value;
-    this.props.addonClickedHandler(value);
+    this.props.targetClickedHandler(value);
   }
   render() {
     const text = this.props.text;
     return (
       <UncontrolledDropdown>
-        <DropdownToggle className="App__button" onClick={this.toggleHandler}>
+        <DropdownToggle
+          className="App__Button Button--medium"
+          onClick={this.toggleHandler}
+        >
           {text}
         </DropdownToggle>
-        <DropdownMenu className="App__wrapper" onClick={this.addonClicked}>
+        <DropdownMenu className="App__wrapper" onClick={this.targetClicked}>
           {this.props.children}
         </DropdownMenu>
       </UncontrolledDropdown>

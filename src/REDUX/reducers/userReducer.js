@@ -1,39 +1,44 @@
 import {
-  ADD_USER_DATA,
+  ADD_USER_SETTINGS,
   USER_DATA_LOADING,
   ADD_USER_SUCCESS
 } from "../actionTypes";
 
 const initialState = {
-  isAuth: false,
+  userAuth: false,
   isLoading: true,
   errMess: null,
   username: "",
-  familyname: "",
-  userObj: {}
+
+  userAddons: [],
+  userRota: {},
+  userTasks: {},
+  userShopping: {}
 };
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_USER_DATA:
+    case ADD_USER_SETTINGS:
       return {
         ...state,
         isLoading: false,
         errMess: null,
-        userObj: action.payload
+        userAddons: action.payload.addons,
+        userRota: action.payload.rota,
+        userTasks: action.payload.tasks,
+        userShopping: action.payload.shopping
       };
     case USER_DATA_LOADING:
       return {
         ...state,
+        userAuth: false,
         isLoading: true,
-        errMess: null,
-        familyObj: {}
+        errMess: null
       };
     case ADD_USER_SUCCESS:
       return {
         ...state,
-        username: action.payload[1],
-        familyname: action.payload[0],
-        isAuth: true
+        username: action.payload,
+        userAuth: true
       };
     default:
       return state;

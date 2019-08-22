@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./TodoodleComponent.css";
 
 import { Row, Col, Table, Button, Badge } from "reactstrap";
 
@@ -12,17 +11,36 @@ class TodosComponent extends Component {
     return (
       <main className="container-fluid p-0 TodoodleComponent">
         <Row>
-          <Col xs="12" md="9" lg="5">
+          <Col xs="12" md="7">
             <Table>
               <thead>
                 <tr>
-                  <th scope="col">Today</th>
+                  <th scope="col">
+                    Today
+                    <span className="ml-2 mr-2">
+                      <Button
+                        className="Button--small"
+                        style={{ padding: ".2rem .8rem" }}
+                      >
+                        >
+                      </Button>
+                    </span>
+                    <span className="mr-2">
+                      <Button className="Button--small">>></Button>
+                    </span>
+                    <span className="mr-2">
+                      <Button className="Button--small">>>></Button>
+                    </span>
+                    <span>
+                      <Button className="Button--small">>>>></Button>
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <ShoppingAddon />
+                    <RotaAddon />
                   </td>
                 </tr>
                 <tr>
@@ -32,7 +50,7 @@ class TodosComponent extends Component {
                 </tr>
                 <tr>
                   <td>
-                    <RotaAddon />
+                    <ShoppingAddon />
                   </td>
                 </tr>
               </tbody>
@@ -49,14 +67,59 @@ class TodosComponent extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <Button outline>Shopping</Button>
+                    <Button className="App__Button Button--large">
+                      Shopping
+                    </Button>
                     <Badge pill>4</Badge>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <Button outline>Tasks</Button>
+                    <Button className="App__Button Button--large">Tasks</Button>
                     <Badge>4</Badge>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Button className="App__Button Button--large">Rota</Button>
+                    <Badge pill>4</Badge>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+          <Col md="2" className="d-none d-md-block">
+            <Row>Day after tomorrow</Row>
+            <Row>Week</Row>
+            <Row>Month</Row>
+            <Row>Eventually</Row>
+          </Col>
+        </Row>
+      </main>
+    );
+  }
+}
+
+export default TodosComponent;
+{
+  /* <Col lg="2" className="d-none d-lg-block">
+            <Table>
+              <thead>
+                <tr>
+                  <th scope="col">Day after tomorrow</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Button outline>Shopping</Button>
+                    <Badge>4</Badge>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Button outline>Tasks</Button>
+                    <Badge pill>4</Badge>
                   </td>
                 </tr>
                 <tr>
@@ -68,8 +131,7 @@ class TodosComponent extends Component {
               </tbody>
             </Table>
           </Col>
-
-          <Col lg="2" className="d-none d-lg-block">
+          <Col lg="1" className="d-none d-lg-block">
             <Table>
               <thead>
                 <tr>
@@ -98,8 +160,7 @@ class TodosComponent extends Component {
               </tbody>
             </Table>
           </Col>
-
-          <Col lg="2" className="d-none d-lg-block">
+          <Col lg="1" className="d-none d-lg-block">
             <Table>
               <thead>
                 <tr>
@@ -126,12 +187,5 @@ class TodosComponent extends Component {
                   </td>
                 </tr>
               </tbody>
-            </Table>
-          </Col>
-        </Row>
-      </main>
-    );
-  }
+            </Table>*/
 }
-
-export default TodosComponent;

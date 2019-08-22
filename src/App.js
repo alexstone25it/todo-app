@@ -12,12 +12,16 @@ import LandingPage from "./components/pages/landing/LandingPage";
 class App extends Component {
   render() {
     console.log(
-      "you are in the addtodoForm about to put the user inputs from taskform, shoppingform and rotaform through redux and into firebase"
+      "you are making the quick look component before completing the shoppingform in the quick add component"
     );
     return (
       <BrowserRouter>
         <div className="App">
-          {this.props.isAuth ? <MainComponent /> : <LandingPage />}
+          {this.props.userAuth && this.props.familyAuth ? (
+            <MainComponent />
+          ) : (
+            <LandingPage />
+          )}
         </div>
       </BrowserRouter>
     );
@@ -25,7 +29,8 @@ class App extends Component {
 }
 const mapStateToProps = state => {
   return {
-    isAuth: state.user.isAuth
+    userAuth: state.user.userAuth,
+    familyAuth: state.family.familyAuth
   };
 };
 export default connect(mapStateToProps)(App);

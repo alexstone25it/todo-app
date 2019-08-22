@@ -18,16 +18,18 @@ class AccordionWrapper extends Component {
   render() {
     return (
       <Card>
-        <CardTitle>
+        <CardTitle className="m-0">
           <header>
-            <h3>
-              <Button onClick={this.toggle} className="App__button">
+            <h3 className="m-0">
+              <Button
+                onClick={this.toggle}
+                className="App__button Button--large"
+              >
                 {this.props.listTitle}
                 {this.props.listNum && (
-                <LargeBadge>{this.props.listNum}</LargeBadge>
-              )}
+                  <LargeBadge>{this.props.listNum}</LargeBadge>
+                )}
               </Button>
-            
             </h3>
           </header>
         </CardTitle>

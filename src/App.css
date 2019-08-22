@@ -3,9 +3,40 @@
   background-color: teal;
 }
 .App .App__button {
+  display: inline-block;
+
+  text-align: center;
+  vertical-align: middle;
+
+  font-weight: normal;
+
+  border-radius: 0.25rem;
+
+  cursor: pointer;
+}
+.App .Button--large {
+  width: 100%;
   color: black;
-  background: transparent;
+  background-color: transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
   border: 2px solid teal;
+}
+.App .Button--medium {
+  color: white;
+  background-color: teal;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid white;
+}
+.App .Button--small {
+  color: white;
+  background-color: teal;
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid white;
 }
 .App .App__wrapper {
   border: 1px solid teal;

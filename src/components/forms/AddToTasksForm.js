@@ -2,6 +2,9 @@ import React, { Fragment } from "react";
 
 import { FormGroup, Label, Input } from "reactstrap";
 
+import DayPicker from "react-day-picker";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+
 function AddToTasksForm(props) {
   return (
     <Fragment>
@@ -13,6 +16,7 @@ function AddToTasksForm(props) {
         <Label htmlFor="desc">Description</Label>
         <Input type="textarea" />
       </FormGroup>
+      <DayPicker onDayClick={this.handleDayClick} />
     </Fragment>
   );
 }

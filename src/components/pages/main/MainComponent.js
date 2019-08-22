@@ -2,10 +2,11 @@ import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 
-import { Container } from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 import PrimaryHeader from "../../shared/headers/PrimaryHeader";
-import AddTodoMenu from "../todoodle/components/addTodo/AddTodoMenu";
+import QuickLookComponent from "../todoodle/components/quickLook/QuickLookComponent";
+import QuickAddComponent from "../todoodle/components/quickAdd/QuickAddComponent";
 import NavbarComponent from "../../shared/navbar/NavbarComponent";
 import TodoodleComponent from "../todoodle/TodoodleComponent";
 import Blob from "../../shared/spinners/Blob";
@@ -21,11 +22,15 @@ class MainComponent extends Component {
           ) : (
             <Fragment>
               <PrimaryHeader user={this.props.username} />
-              <AddTodoMenu
-                userAddons={Array.from(
-                  this.props.familyObj.addons.concat(this.props.userObj.addons)
-                )}
-              />
+              <Row className="justify-content-start justify-content-sm-center mb-3 pl-3">
+                <QuickLookComponent />
+                <Col-1 role="presentation" style={{ width: "10%" }} />
+                <QuickAddComponent
+                  userAddons={Array.from(this.props.familyAddons).concat(
+                    this.props.userAddons
+                  )}
+                />
+              </Row>
               <TodoodleComponent />
             </Fragment>
           )}
@@ -38,10 +43,10 @@ class MainComponent extends Component {
 const mapStateToProps = state => {
   return {
     username: state.user.username,
-    familyname: state.user.familyname,
-    userObj: state.user.userObj,
+    familyname: state.family.familyname,
+    userAddons: state.user.userAddons,
     userLoading: state.user.isLoading,
-    familyObj: state.family.familyObj,
+    familyAddons: state.family.familyAddons,
     familyLoading: state.family.isLoading
   };
 };

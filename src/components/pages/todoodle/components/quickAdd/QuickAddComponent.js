@@ -7,17 +7,16 @@ import { connect } from "react-redux";
 import { addAddonTargeted } from "../../../../../REDUX/actionCreators/addTodoCreator";
 
 import DropdownComponent from "../../../../shared/dropdowns/DropdownComponent";
-import AddTodoModal from "./AddTodoModal";
-import AddTodoForm from "./AddTodoForm";
+import SimpleModal from "../../../../shared/modals/SimpleModal";
+import QuickAddTodoForm from "./QuickAddTodoForm";
 
 const uuid = require("uuid/v4");
 
-class AddTodoMenu extends Component {
+class QuickAddComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false,
-      addonTargeted: ""
+      modalOpen: false
     };
     this.toggleModalHandler = this.toggleModalHandler.bind(this);
     this.addonClickedHandler = this.addonClickedHandler.bind(this);
@@ -49,17 +48,17 @@ class AddTodoMenu extends Component {
     ));
     return (
       <Fragment>
-        <AddTodoModal
+        <SimpleModal
           toggleModal={this.toggleModalHandler}
           modalOpen={this.state.modalOpen}
-          addonSelected={this.props.addonTargeted}
+          modalTitle={this.props.addonTargeted}
         >
-          <AddTodoForm />
-        </AddTodoModal>
+          <QuickAddTodoForm />
+        </SimpleModal>
         <Row>
           <DropdownComponent
             text="QUICK ADD"
-            addonClickedHandler={this.addonClickedHandler}
+            targetClickedHandler={this.addonClickedHandler}
           >
             {addonArray}
           </DropdownComponent>
@@ -79,4 +78,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddTodoMenu);
+)(QuickAddComponent);
