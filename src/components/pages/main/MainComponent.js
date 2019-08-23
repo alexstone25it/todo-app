@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import { Container, Row } from "reactstrap";
 
+import { concatToArray } from "../../shared/functions/minor/minorFuncs";
+
 import PrimaryHeader from "../../shared/headers/PrimaryHeader";
 import QuickLookComponent from "../todoodle/components/quickLook/QuickLookComponent";
 import QuickAddComponent from "../todoodle/components/quickAdd/QuickAddComponent";
@@ -26,7 +28,8 @@ class MainComponent extends Component {
                 <QuickLookComponent />
                 <Col-1 role="presentation" style={{ width: "10%" }} />
                 <QuickAddComponent
-                  userAddons={Array.from(this.props.familyAddons).concat(
+                  userAddons={concatToArray(
+                    this.props.familyAddons,
                     this.props.userAddons
                   )}
                 />

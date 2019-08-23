@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
+import AccordionRotateWrapper from "../../../../shared/accordion/AccordionRotateWrapper";
 import Task from "./Task";
 
 const uuid = require("uuid/v4");
@@ -78,14 +78,14 @@ class TaskAddon extends Component {
       <Task key={uuid()} taskInfo={task} taskClicked={this.taskClicked} />
     ));
     return (
-      <AccordionWrapper
+      <AccordionRotateWrapper
         toggleAccordion={this.toggleAccordionHandler}
         accordionOpen={this.state.accordionOpen}
         listTitle={listTitle}
         listNum={listNum}
       >
         <ul className="list-group">{taskList}</ul>
-      </AccordionWrapper>
+      </AccordionRotateWrapper>
     );
   }
 }

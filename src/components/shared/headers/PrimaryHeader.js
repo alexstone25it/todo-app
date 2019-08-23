@@ -1,6 +1,6 @@
 import React from "react";
 
-import { capitalFirstLetter } from "../functions";
+import { capitalFirstLetter } from "../functions/minor/minorFuncs";
 
 function PrimaryHeader({ user }) {
   let title;

@@ -32,7 +32,6 @@ class Rota extends Component {
         accordionOpen={this.state.accordionOpen}
         listTitle={person.name}
         listNum={person.events.length}
-        customiseToInner="true"
       >
         <Row>
           <Col xs="12">

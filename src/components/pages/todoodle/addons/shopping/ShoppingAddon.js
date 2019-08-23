@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { Button } from "reactstrap";
 
-import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
+import AccordionRotateWrapper from "../../../../shared/accordion/AccordionRotateWrapper";
 import StrikeThrough from "../../components/strikeThrough/StrikeThrough";
 import { SmallBadge } from "../../../../shared/buttons/Badges";
 
@@ -62,14 +62,14 @@ class ShoppingAddon extends Component {
       </li>
     ));
     return (
-      <AccordionWrapper
+      <AccordionRotateWrapper
         toggleAccordion={this.toggleAccordionHandler}
         accordionOpen={this.state.accordionOpen}
         listTitle={listTitle}
         listNum={listNum}
       >
         {shopList}
-      </AccordionWrapper>
+      </AccordionRotateWrapper>
     );
   }
 }

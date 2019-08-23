@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AccordionWrapper from "../../../../shared/accordion/AccordionWrapper";
+import AccordionRotateWrapper from "../../../../shared/accordion/AccordionRotateWrapper";
 import Rota from "./Rota";
 
 const uuid = require("uuid/v4");
@@ -51,7 +51,7 @@ class RotaAddon extends Component {
     const listTitle = "Rota";
     const listNum = this.state.people.length;
     return (
-      <AccordionWrapper
+      <AccordionRotateWrapper
         toggleAccordion={this.toggleAccordionHandler}
         accordionOpen={this.state.accordionOpen}
         listTitle={listTitle}
@@ -60,7 +60,7 @@ class RotaAddon extends Component {
         {this.state.people.map(person => (
           <Rota key={uuid()} person={person} />
         ))}
-      </AccordionWrapper>
+      </AccordionRotateWrapper>
     );
   }
 }

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-import { Row, Table } from "reactstrap";
+import { Table } from "reactstrap";
 
 import DropdownComponent from "../../../../shared/dropdowns/DropdownComponent";
-
-const uuid = require("uuid/v4");
 
 class QuickLookComponent extends Component {
   constructor(props) {
