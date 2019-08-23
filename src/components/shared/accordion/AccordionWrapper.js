@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Collapse, Card, CardTitle, CardBody, Button, Row } from "reactstrap";
+import { Collapse, Card, CardTitle, CardBody, Button } from "reactstrap";
 
 import { LargeBadge } from "../buttons/Badges";
 
@@ -8,9 +8,9 @@ class AccordionWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = { collapse: false };
-    this.toggle = this.toggle.bind(this);
+    this.toggleHandler = this.toggleHandler.bind(this);
   }
-  toggle() {
+  toggleHandler() {
     this.setState(prevState => ({
       collapse: !prevState.collapse
     }));
@@ -22,7 +22,7 @@ class AccordionWrapper extends Component {
           <header>
             <h3 className="m-0">
               <Button
-                onClick={this.toggle}
+                onClick={this.toggleHandler}
                 className="App__button Button--large"
               >
                 {this.props.listTitle}

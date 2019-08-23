@@ -12,7 +12,7 @@ import LandingPage from "./components/pages/landing/LandingPage";
 class App extends Component {
   render() {
     console.log(
-      "you are making the quick look component before completing the shoppingform in the quick add component"
+      "you are completing the shoppingform in the quick add component, you have to press the buttons twice so there is a problem in the accordion rotate wrapper"
     );
     return (
       <BrowserRouter>

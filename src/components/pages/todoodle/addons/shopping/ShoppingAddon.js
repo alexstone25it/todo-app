@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { connect } from "react-redux";
+
 import { Button } from "reactstrap";
 
 import AccordionRotateWrapper from "../../../../shared/accordion/AccordionRotateWrapper";
@@ -12,23 +14,13 @@ class ShoppingAddon extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shopping: [
-        { name: "milk", quantity: "2", gotten: false },
-        { name: "bread", quantity: "1", gotten: false },
-        { name: "yoghurt", quantity: "1", gotten: false },
-        { name: "choc croissants", quantity: "2", gotten: false }
-      ],
-      accordionOpen: false
+      userShoppingArray: this.makeArray(this.props.userShopping),
+      familyShoppingArray: this.makeArray(this.props.familyShopping)
     };
-    this.toggleAccordionHandler = this.toggleAccordionHandler.bind(this);
+
     this.strikeItemHandler = this.strikeItemHandler.bind(this);
   }
-  toggleAccordionHandler(evt) {
-    this.setState(prevState => ({
-      ...prevState,
-      accordionOpen: !prevState.accordionOpen
-    }));
-  }
+
   strikeItemHandler(evt) {
     const val = evt.target.value;
     this.setState(prevState => ({
@@ -38,10 +30,41 @@ class ShoppingAddon extends Component {
       )
     }));
   }
+  makeArray(obj) {
+    return Object.entries(obj).map(item => ({
+      name: item[0],
+      quantity: String(item[1]),
+      gotten: false
+    }));
+  }
   render() {
     const listTitle = "Shopping";
-    const listNum = this.state.shopping.length;
-    const shopList = this.state.shopping.map(item => (
+    const leftTitle = this.props.username;
+    const rightTitle = "family";
+    const leftListNum = Object.keys(this.props.userShopping).length;
+    const rightListNum = Object.keys(this.props.familyShopping).length;
+
+    const shopListLeft = this.state.userShoppingArray.map(item => (
+      <li key={uuid()}>
+        <StrikeThrough stricken={item.gotten}>
+          {item.name} <SmallBadge>{item.quantity}</SmallBadge>
+        </StrikeThrough>
+        <span className="ml-3">
+          {!item.gotten ? (
+            <Button
+              outline
+              color="success"
+              className="p-0"
+              value={item.name}
+              onClick={this.strikeItemHandler}
+            >
+              Got it!
+            </Button>
+          ) : null}
+        </span>
+      </li>
+    ));
+    const shopListRight = this.state.familyShoppingArray.map(item => (
       <li key={uuid()}>
         <StrikeThrough stricken={item.gotten}>
           {item.name} <SmallBadge>{item.quantity}</SmallBadge>
@@ -63,15 +86,25 @@ class ShoppingAddon extends Component {
     ));
     return (
       <AccordionRotateWrapper
-        toggleAccordion={this.toggleAccordionHandler}
-        accordionOpen={this.state.accordionOpen}
         listTitle={listTitle}
-        listNum={listNum}
-      >
-        {shopList}
-      </AccordionRotateWrapper>
+        leftTitle={leftTitle}
+        rightTitle={rightTitle}
+        leftListNum={leftListNum}
+        rightListNum={rightListNum}
+        leftList={shopListLeft}
+        rightList={shopListRight}
+      />
     );
   }
 }
-
-export default ShoppingAddon;
+const mapStateToProps = state => {
+  return {
+    username: state.user.username,
+    familyShopping: state.family.familyShopping,
+    userShopping: state.user.userShopping
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(ShoppingAddon);

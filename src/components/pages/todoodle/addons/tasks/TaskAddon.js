@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import { connect } from "react-redux";
+
 import AccordionRotateWrapper from "../../../../shared/accordion/AccordionRotateWrapper";
 import Task from "./Task";
 

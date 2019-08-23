@@ -41,7 +41,7 @@ class RotaAddon extends Component {
     };
     this.toggleAccordionHandler = this.toggleAccordionHandler.bind(this);
   }
-  toggleAccordionHandler(target) {
+  toggleAccordionHandler() {
     this.setState(prevState => ({
       ...prevState,
       accordionOpen: !prevState.accordionOpen

@@ -2,18 +2,27 @@ import React, { Component } from "react";
 
 import { Collapse, Card, CardTitle, CardBody, Button, Row } from "reactstrap";
 
-import { LargeBadge } from "../buttons/Badges";
+import { SmallBadge } from "../buttons/Badges";
 
 class AccordionRotateWrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = { collapse: false };
-    this.toggle = this.toggle.bind(this);
+    this.state = { collapse: false, lastValue: "" };
+    this.toggleHandler = this.toggleHandler.bind(this);
   }
-  toggle() {
-    this.setState(prevState => ({
-      collapse: !prevState.collapse
-    }));
+  toggleHandler(event) {
+    const value = event.target.value;
+    if (this.state.lastValue !== "" && value !== this.state.lastValue) {
+      this.setState(prevState => ({
+        ...prevState,
+        lastValue: value
+      }));
+    } else {
+      this.setState(prevState => ({
+        collapse: !prevState.collapse,
+        lastValue: value
+      }));
+    }
   }
   render() {
     return (
@@ -23,25 +32,36 @@ class AccordionRotateWrapper extends Component {
             className="justify-content-between"
             style={{ marginLeft: ".1rem", marginRight: ".1rem" }}
           >
-            <Button onClick={this.toggle} className="App__button Button--small">
-              User
+            <Button
+              onClick={this.toggleHandler}
+              className="App__button Button--small"
+              value="left"
+            >
+              {this.props.leftTitle}
+              <SmallBadge>{this.props.leftListNum}</SmallBadge>
             </Button>
             <header>
               <h3 className="m-0" style={{ fontSize: "1.2rem" }}>
-                {this.props.listTitle}{" "}
-                {this.props.listNum && (
-                  <LargeBadge>{this.props.listNum}</LargeBadge>
-                )}
+                {this.props.listTitle}
               </h3>
             </header>
-            <Button onClick={this.toggle} className="App__button Button--small">
-              Family
+            <Button
+              onClick={this.toggleHandler}
+              className="App__button Button--small"
+              value="right"
+            >
+              <SmallBadge>{this.props.rightListNum}</SmallBadge>{" "}
+              {this.props.rightTitle}
             </Button>
           </Row>
         </CardTitle>
 
         <Collapse isOpen={this.state.collapse}>
-          <CardBody>{this.props.children}</CardBody>
+          {this.state.lastValue === "right" ? (
+            <CardBody>{this.props.rightList}</CardBody>
+          ) : (
+            <CardBody>{this.props.leftList}</CardBody>
+          )}
         </Collapse>
       </Card>
     );

@@ -12,10 +12,6 @@ import MoveLeftMoveRight from "../../shared/buttons/MoveLeftMoveRight";
 const uuid = require("uuid/v4");
 
 class TodosComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const addonsArray = concatToArray(
       this.props.familyAddons,

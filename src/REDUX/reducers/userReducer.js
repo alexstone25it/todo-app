@@ -9,7 +9,6 @@ const initialState = {
   isLoading: true,
   errMess: null,
   username: "",
-
   userAddons: [],
   userRota: {},
   userTasks: {},
