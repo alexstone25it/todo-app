@@ -101,7 +101,8 @@ const mapStateToProps = state => {
   return {
     username: state.user.username,
     familyShopping: state.family.familyShopping,
-    userShopping: state.user.userShopping
+    userShopping: state.user.userShopping,
+    familyRota: state.family.familyRota
   };
 };
 export default connect(

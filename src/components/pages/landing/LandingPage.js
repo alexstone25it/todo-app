@@ -76,7 +76,6 @@ const mapDispatchToProps = {
   fetchUserData,
   fetchFamilyData
 };
-
 export default connect(
   null,
   mapDispatchToProps

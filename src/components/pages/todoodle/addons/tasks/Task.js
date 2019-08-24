@@ -32,7 +32,6 @@ class Task extends Component {
           toggleAccordion={this.toggleAccordionHandler}
           accordionOpen={this.state.accordionOpen}
           listTitle={this.props.taskInfo.title}
-          customiseToInner="true"
         >
           <Row>
             <Col xs="12">

@@ -25,6 +25,16 @@ class AccordionRotateWrapper extends Component {
     }
   }
   render() {
+    let listContent;
+    if (this.state.lastValue === "right") {
+      listContent = <CardBody>{this.props.rightList}</CardBody>;
+    } else if (this.state.lastValue === "left") {
+      listContent = <CardBody>{this.props.leftList}</CardBody>;
+    } else if (this.state.lastValue === "center") {
+      listContent = (
+        <CardBody>{this.props.leftList.concat(this.props.rightList)}</CardBody>
+      );
+    }
     return (
       <Card>
         <CardTitle className="m-0">
@@ -42,7 +52,13 @@ class AccordionRotateWrapper extends Component {
             </Button>
             <header>
               <h3 className="m-0" style={{ fontSize: "1.2rem" }}>
-                {this.props.listTitle}
+                <Button
+                  onClick={this.toggleHandler}
+                  className="App__button Button--small"
+                  value="center"
+                >
+                  {this.props.listTitle}
+                </Button>
               </h3>
             </header>
             <Button
@@ -50,18 +66,14 @@ class AccordionRotateWrapper extends Component {
               className="App__button Button--small"
               value="right"
             >
-              <SmallBadge>{this.props.rightListNum}</SmallBadge>{" "}
+              <SmallBadge>{this.props.rightListNum}</SmallBadge>
               {this.props.rightTitle}
             </Button>
           </Row>
         </CardTitle>
 
         <Collapse isOpen={this.state.collapse}>
-          {this.state.lastValue === "right" ? (
-            <CardBody>{this.props.rightList}</CardBody>
-          ) : (
-            <CardBody>{this.props.leftList}</CardBody>
-          )}
+          <ul className="list-group">{listContent}</ul>
         </Collapse>
       </Card>
     );

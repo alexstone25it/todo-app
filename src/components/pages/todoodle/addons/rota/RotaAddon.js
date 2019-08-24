@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { connect } from "react-redux";
+
 import AccordionRotateWrapper from "../../../../shared/accordion/AccordionRotateWrapper";
 import Rota from "./Rota";
 
@@ -9,60 +11,54 @@ class RotaAddon extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      people: [
-        {
-          name: "Carl",
-          events: [
-            { title: "work", info: "06-14" },
-            { title: "pick up Taran", info: "14.30" }
-          ]
-        },
-        {
-          name: "Alex",
-          events: [
-            { title: "work", info: "16-00" },
-            { title: "make appointment", info: "dentist" }
-          ]
-        },
-        {
-          name: "Isla",
-          events: [
-            { title: "school", info: "08.30" },
-            { title: "cooking day", info: "take 3 euro" },
-            { title: "go upstairs", info: "14" }
-          ]
-        },
-        {
-          name: "Taran",
-          events: [{ title: "nursery", info: "08.30-14.30" }]
-        }
-      ],
-      accordionOpen: false
+      userRotaArray: this.makeArray(this.props.userRota),
+      familyRotaArray: this.makeArray(this.props.familyRota)
     };
-    this.toggleAccordionHandler = this.toggleAccordionHandler.bind(this);
   }
-  toggleAccordionHandler() {
-    this.setState(prevState => ({
-      ...prevState,
-      accordionOpen: !prevState.accordionOpen
+  makeArray(obj) {
+    return Object.entries(obj).map((item, index) => ({
+      id: index,
+      name: item[0],
+      events: Object.entries(item[1]).map(item => ({
+        title: item[0],
+        info: item[1]
+      })),
+      done: false
     }));
   }
   render() {
     const listTitle = "Rota";
-    const listNum = this.state.people.length;
+    const leftTitle = this.props.username;
+    const rightTitle = "family";
+    const leftListNum = 2;
+    const rightListNum = 5;
+    const rotaListLeft = this.state.userRotaArray.map(person => (
+      <Rota key={uuid()} person={person} />
+    ));
+    const rotaListRight = this.state.familyRotaArray.map(person => (
+      <Rota key={uuid()} person={person} />
+    ));
     return (
       <AccordionRotateWrapper
-        toggleAccordion={this.toggleAccordionHandler}
-        accordionOpen={this.state.accordionOpen}
         listTitle={listTitle}
-        listNum={listNum}
-      >
-        {this.state.people.map(person => (
-          <Rota key={uuid()} person={person} />
-        ))}
-      </AccordionRotateWrapper>
+        leftTitle={leftTitle}
+        rightTitle={rightTitle}
+        leftListNum={leftListNum}
+        rightListNum={rightListNum}
+        leftList={rotaListLeft}
+        rightList={rotaListRight}
+      ></AccordionRotateWrapper>
     );
   }
 }
-
-export default RotaAddon;
+const mapStateToProps = state => {
+  return {
+    username: state.user.username,
+    userRota: state.user.userRota,
+    familyRota: state.family.familyRota
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(RotaAddon);
