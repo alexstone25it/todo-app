@@ -11,20 +11,18 @@ class TaskAddon extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [
-        { id: "1", title: "Make apps to fill portfolio", done: false },
-        { id: "2", title: "Make spiffy and awesome!", done: false },
-        { id: "3", title: "Make portfolio", done: false }
-      ],
-      accordionOpen: false
+      userTasksArray: this.makeArray(this.props.userTasks),
+      familyTasksArray: this.makeArray(this.props.familyTasks)
     };
-    this.toggleAccordionHandler = this.toggleAccordionHandler.bind(this);
+
     this.taskClicked = this.taskClicked.bind(this);
   }
-  toggleAccordionHandler(evt) {
-    this.setState(prevState => ({
-      ...prevState,
-      accordionOpen: !prevState.accordionOpen
+  makeArray(obj) {
+    return Object.entries(obj).map((item, index) => ({
+      id: index,
+      title: item[0],
+      desc: String(item[1]),
+      done: false
     }));
   }
   taskClicked(id, value) {
@@ -76,21 +74,38 @@ class TaskAddon extends Component {
   }
   render() {
     const listTitle = "Tasks";
-    const listNum = this.state.tasks.length;
-    const taskList = this.state.tasks.map(task => (
+    const leftTitle = this.props.username;
+    const rightTitle = "family";
+    const leftListNum = Object.keys(this.props.userTasks).length;
+    const rightListNum = Object.keys(this.props.familyTasks).length;
+
+    const taskListLeft = this.state.userTasksArray.map(task => (
+      <Task key={uuid()} taskInfo={task} taskClicked={this.taskClicked} />
+    ));
+    const taskListRight = this.state.familyTasksArray.map(task => (
       <Task key={uuid()} taskInfo={task} taskClicked={this.taskClicked} />
     ));
     return (
       <AccordionRotateWrapper
-        toggleAccordion={this.toggleAccordionHandler}
-        accordionOpen={this.state.accordionOpen}
         listTitle={listTitle}
-        listNum={listNum}
-      >
-        <ul className="list-group">{taskList}</ul>
-      </AccordionRotateWrapper>
+        leftTitle={leftTitle}
+        rightTitle={rightTitle}
+        leftListNum={leftListNum}
+        rightListNum={rightListNum}
+        leftList={taskListLeft}
+        rightList={taskListRight}
+      ></AccordionRotateWrapper>
     );
   }
 }
-
-export default TaskAddon;
+const mapStateToProps = state => {
+  return {
+    username: state.user.username,
+    userTasks: state.user.userTasks,
+    familyTasks: state.family.familyTasks
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(TaskAddon);
