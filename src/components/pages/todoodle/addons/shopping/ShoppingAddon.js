@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 
-import { Button } from "reactstrap";
+import { Button, NavLink, NavItem } from "reactstrap";
 
 import AccordionRotateWrapper from "../../../../shared/accordion/AccordionRotateWrapper";
 import StrikeThrough from "../../components/strikeThrough/StrikeThrough";
@@ -17,10 +17,12 @@ class ShoppingAddon extends Component {
       userShoppingArray: this.makeArray(this.props.userShopping),
       familyShoppingArray: this.makeArray(this.props.familyShopping)
     };
-
+    this.toggleAddon = this.toggleAddon.bind(this);
     this.strikeItemHandler = this.strikeItemHandler.bind(this);
   }
-
+  toggleAddon() {
+    this.props.toggleAddons("shopping");
+  }
   strikeItemHandler(evt) {
     const val = evt.target.value;
     this.setState(prevState => ({
@@ -85,15 +87,29 @@ class ShoppingAddon extends Component {
       </li>
     ));
     return (
-      <AccordionRotateWrapper
-        listTitle={listTitle}
-        leftTitle={leftTitle}
-        rightTitle={rightTitle}
-        leftListNum={leftListNum}
-        rightListNum={rightListNum}
-        leftList={shopListLeft}
-        rightList={shopListRight}
-      />
+      <Fragment>
+        <NavItem>
+          <NavLink
+            className="App__button Button--small"
+            onClick={this.toggleAddon}
+          >
+            <header>
+              <h3 className="m-0" style={{ fontSize: "1.2rem" }}>
+                {listTitle} <SmallBadge>1</SmallBadge>
+              </h3>
+            </header>
+          </NavLink>
+        </NavItem>
+        <AccordionRotateWrapper
+          listTitle={listTitle}
+          leftTitle={leftTitle}
+          rightTitle={rightTitle}
+          leftListNum={leftListNum}
+          rightListNum={rightListNum}
+          leftList={shopListLeft}
+          rightList={shopListRight}
+        />
+      </Fragment>
     );
   }
 }

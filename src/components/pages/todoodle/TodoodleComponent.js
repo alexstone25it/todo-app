@@ -8,18 +8,31 @@ import { concatToArray } from "../../shared/functions/minor/minorFuncs";
 import { matchAddon } from "../../shared/functions/major/matchAddon";
 
 import MoveLeftMoveRight from "../../shared/buttons/MoveLeftMoveRight";
-
 const uuid = require("uuid/v4");
-
 class TodosComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeTab: undefined
+    };
+  }
+  toggleAddonsHandler() {
+    console.log("hi");
+  }
   render() {
-    const addonsArray = concatToArray(
+    const allAddons = concatToArray(
       this.props.familyAddons,
       this.props.userAddons
-    ).map(addon => matchAddon(addon));
-
-    const allAddons = addonsArray.map(addon => (
-      <Col xs="12" lg="4" className="mt-3" key={uuid()}>
+    );
+    const matchedAddons = allAddons.map(addon => matchAddon(addon));
+    const addonsArray = matchedAddons.map(addon => (
+      <Col
+        xs="12"
+        lg="4"
+        className="mt-3"
+        key={uuid()}
+        toggleAddons={this.toggleAddonsHandler}
+      >
         {addon}
       </Col>
     ));
@@ -27,11 +40,11 @@ class TodosComponent extends Component {
       <main className="container-fluid p-0 TodoodleComponent">
         <Row
           className="justify-content-around"
-          style={{ backgroundColor: "white" }}
+          style={{ backgroundColor: "white", borderRadius: ".25rem" }}
         >
           <MoveLeftMoveRight />
         </Row>
-        <Row>{allAddons}</Row>
+        <Row>{addonsArray}</Row>
       </main>
     );
   }
