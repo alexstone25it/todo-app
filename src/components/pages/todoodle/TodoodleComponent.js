@@ -2,7 +2,10 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { addAddonToView } from "../../../REDUX/actionCreators/viewCreator";
+import {
+  addAddonToView,
+  removeAddonFromView
+} from "../../../REDUX/actionCreators/viewCreator";
 
 import { Row, Col } from "reactstrap";
 
@@ -20,21 +23,34 @@ class TodosComponent extends Component {
     this.titleClickedHandler = this.titleClickedHandler.bind(this);
   }
   titleClickedHandler(title) {
-    this.props.addAddonToView(title);
+    const combinedAddonTitles = concatToArray(
+      this.props.familyAddons,
+      this.props.userAddons
+    );
+    if (title === "all") {
+      if (this.props.addonsInView.length === combinedAddonTitles.length) {
+        this.props.removeAddonFromView();
+      } else {
+        console.log(
+          "you are in the todoodle component; only pass through the addons that aren't currently showing"
+        );
+        this.props.addAddonToView(combinedAddonTitles);
+      }
+    } else if (this.props.addonsInView.indexOf(title) !== -1) {
+      this.props.removeAddonFromView(title);
+    } else {
+      this.props.addAddonToView(title);
+    }
   }
   render() {
     const combinedAddonTitles = concatToArray(
       this.props.familyAddons,
       this.props.userAddons
     );
-    let addonsInViewTitlesArray;
-    if (this.props.addonsInView.indexOf("all") !== -1) {
-      addonsInViewTitlesArray = combinedAddonTitles;
-    } else {
-      addonsInViewTitlesArray = combinedAddonTitles.map(title =>
-        this.props.addonsInView.indexOf(title) !== -1 ? title : null
-      );
-    }
+    const addonsInViewTitlesArray = combinedAddonTitles.map(title =>
+      this.props.addonsInView.indexOf(title) !== -1 ? title : null
+    );
+
     const addonsArray = addonsInViewTitlesArray.map(addon => matchAddon(addon));
 
     const allAddons = addonsArray.map(addon => (
@@ -69,7 +85,8 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = {
-  addAddonToView
+  addAddonToView,
+  removeAddonFromView
 };
 export default connect(
   mapStateToProps,

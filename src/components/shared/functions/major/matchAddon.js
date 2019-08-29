@@ -15,6 +15,6 @@ export const matchAddon = addon => {
     case undefined:
       return null;
     default:
-      console.log("no addons");
+      return null;
   }
 };
