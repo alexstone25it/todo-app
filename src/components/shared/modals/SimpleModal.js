@@ -13,7 +13,10 @@ function SimpleModal(props) {
         <ModalHeader>{modalTitle}</ModalHeader>
         <ModalBody>{children}</ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggleModal}>
+          <Button
+            style={{ backgroundColor: "teal", border: "1px solid black" }}
+            onClick={toggleModal}
+          >
             Cancel
           </Button>
         </ModalFooter>

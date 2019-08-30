@@ -27,6 +27,7 @@ class TitlesNav extends Component {
     return (
       <Nav
         tabs
+        className="justify-content-between"
         style={{
           backgroundColor: "white",
           margin: "2px",

@@ -2,8 +2,7 @@ import React, { Fragment } from "react";
 
 import { FormGroup, Label, Input } from "reactstrap";
 
-import DayPicker from "react-day-picker";
-import DayPickerInput from "react-day-picker/DayPickerInput";
+import EitherOrBtnGroup from "../shared/buttons/EitherOrBtnGroup";
 
 function AddToTasksForm(props) {
   return (
@@ -16,7 +15,7 @@ function AddToTasksForm(props) {
         <Label htmlFor="desc">Description</Label>
         <Input type="textarea" />
       </FormGroup>
-      <DayPicker onDayClick={this.handleDayClick} />
+      <EitherOrBtnGroup />
     </Fragment>
   );
 }

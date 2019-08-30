@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 import "./App.css";
 
-import MainComponent from "./components/pages/main/MainComponent";
+import TodoodlesContainer from "./components/pages/main/TodoodlesContainer";
 import LandingPage from "./components/pages/landing/LandingPage";
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           {this.props.userAuth && this.props.familyAuth ? (
-            <MainComponent />
+            <TodoodlesContainer />
           ) : (
             <LandingPage />
           )}
