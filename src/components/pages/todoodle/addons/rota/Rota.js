@@ -18,7 +18,7 @@ class Rota extends Component {
     const id = this.props.taskInfo.id;
     this.props.taskClicked(id, value);
   }
-  toggleAccordionHandler(evt) {
+  toggleAccordionHandler() {
     this.setState(prevState => ({
       ...prevState,
       accordionOpen: !prevState.accordionOpen

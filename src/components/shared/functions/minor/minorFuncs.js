@@ -4,3 +4,6 @@ export const capitalFirstLetter = str => {
 
 export const concatToArray = (firstArray, secondArray) =>
   Array.from(firstArray).concat(secondArray);
+
+export const concatToArrayNoDupes = (firstArray, secondArray) =>
+  Array.from(...[new Set(Array.from(firstArray).concat(secondArray))]);

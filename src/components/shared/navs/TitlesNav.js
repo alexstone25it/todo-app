@@ -14,16 +14,31 @@ class TitlesNav extends Component {
   }
   render() {
     const renderedNavList = this.props.titles.map(title => (
-      <NavItem key={uuid()}>
+      <NavItem
+        key={uuid()}
+        className="App__button  Button--onWhite"
+        style={{ margin: "3px" }}
+      >
         <NavLink onClick={this.linkClicked} title={title}>
           {title}
         </NavLink>
       </NavItem>
     ));
     return (
-      <Nav tabs>
-        {renderedNavList}{" "}
-        <NavItem key={uuid()}>
+      <Nav
+        tabs
+        style={{
+          backgroundColor: "white",
+          margin: "2px",
+          borderRadius: ".25rem"
+        }}
+      >
+        {renderedNavList}
+        <NavItem
+          key={uuid()}
+          className="App__button  Button--onWhite"
+          style={{ margin: "3px" }}
+        >
           <NavLink onClick={this.linkClicked} title="all">
             Show all
           </NavLink>

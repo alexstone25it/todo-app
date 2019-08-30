@@ -1,5 +1,7 @@
 import { ADD_ADDON_TO_VIEW, REMOVE_ADDON_FROM_VIEW } from "../actionTypes";
 
+import { concatToArrayNoDupes } from "../../components/shared/functions/minor/minorFuncs";
+
 const initialState = {
   addonsInView: []
 };
@@ -9,7 +11,7 @@ export const viewReducer = (state = initialState, action) => {
       const tempArr1 = state.addonsInView.slice();
       const newAddonsInView1 =
         tempArr1.indexOf(action.payload) === -1
-          ? tempArr1.concat(action.payload)
+          ? concatToArrayNoDupes(tempArr1, action.payload)
           : tempArr1;
       return {
         ...state,
@@ -17,13 +19,10 @@ export const viewReducer = (state = initialState, action) => {
       };
     case REMOVE_ADDON_FROM_VIEW:
       const tempArr2 = state.addonsInView.slice();
-      console.log(action.payload);
       const newAddonsInView2 =
         action.payload === undefined
           ? []
           : tempArr2.filter(addon => addon !== action.payload);
-
-      console.log(newAddonsInView2);
       return {
         ...state,
         addonsInView: newAddonsInView2

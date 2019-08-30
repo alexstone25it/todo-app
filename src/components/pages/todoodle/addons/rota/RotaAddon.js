@@ -16,28 +16,40 @@ class RotaAddon extends Component {
     };
   }
   makeArray(obj) {
-    return Object.entries(obj).map((item, index) => ({
-      id: index,
-      name: item[0],
-      events: Object.entries(item[1]).map(item => ({
-        title: item[0],
-        info: item[1]
-      })),
-      done: false
-    }));
+    if (!obj) {
+      return [];
+    } else {
+      return Object.entries(obj).map((item, index) => ({
+        id: index,
+        name: item[0],
+        events: Object.entries(item[1]).map(item => ({
+          title: item[0],
+          info: item[1]
+        })),
+        done: false
+      }));
+    }
+  }
+  generateListNum(prop) {
+    if (prop !== undefined) {
+      return Object.keys(prop).length;
+    } else {
+      return -1;
+    }
+  }
+  generateRotaList(arr) {
+    if (arr.length > 0) {
+      return arr.map(person => <Rota key={uuid()} person={person} />);
+    }
   }
   render() {
     const listTitle = "Rota";
     const leftTitle = this.props.username;
     const rightTitle = "family";
-    const leftListNum = 2;
-    const rightListNum = 5;
-    const rotaListLeft = this.state.userRotaArray.map(person => (
-      <Rota key={uuid()} person={person} />
-    ));
-    const rotaListRight = this.state.familyRotaArray.map(person => (
-      <Rota key={uuid()} person={person} />
-    ));
+    const leftListNum = this.generateListNum(this.props.userRota);
+    const rightListNum = this.generateListNum(this.props.familyRota);
+    const rotaListLeft = this.generateRotaList(this.state.userRotaArray);
+    const rotaListRight = this.generateRotaList(this.state.familyRotaArray);
     return (
       <AccordionRotateWrapper
         listTitle={listTitle}

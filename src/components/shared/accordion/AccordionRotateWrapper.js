@@ -34,12 +34,18 @@ class AccordionRotateWrapper extends Component {
           >
             <Button
               onClick={this.toggleHandler}
-              className="App__button Button--small"
+              className="App__button Button--small--onWhite"
+              style={
+                this.props.leftListNum === -1
+                  ? { visibility: "hidden" }
+                  : { visibility: "visible" }
+              }
               value="left"
             >
               {this.props.leftTitle}
               <SmallBadge>{this.props.leftListNum}</SmallBadge>
             </Button>
+
             <header>
               <h3 className="m-0" style={{ fontSize: "1.2rem" }}>
                 {this.props.listTitle}
@@ -47,10 +53,15 @@ class AccordionRotateWrapper extends Component {
             </header>
             <Button
               onClick={this.toggleHandler}
-              className="App__button Button--small"
+              className="App__button Button--small--onWhite"
+              style={
+                this.props.leftRightNum === -1
+                  ? { visibility: "hidden" }
+                  : { visibility: "visible" }
+              }
               value="right"
             >
-              <SmallBadge>{this.props.rightListNum}</SmallBadge>{" "}
+              <SmallBadge>{this.props.rightListNum}</SmallBadge>
               {this.props.rightTitle}
             </Button>
           </Row>

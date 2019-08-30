@@ -9,7 +9,7 @@ import {
 
 import { Row, Col } from "reactstrap";
 
-import { concatToArray } from "../../shared/functions/minor/minorFuncs";
+import { concatToArrayNoDupes } from "../../shared/functions/minor/minorFuncs";
 import { matchAddon } from "../../shared/functions/major/matchAddon";
 import TitlesNav from "../../shared/navs/TitlesNav";
 
@@ -23,7 +23,7 @@ class TodosComponent extends Component {
     this.titleClickedHandler = this.titleClickedHandler.bind(this);
   }
   titleClickedHandler(title) {
-    const combinedAddonTitles = concatToArray(
+    const combinedAddonTitles = concatToArrayNoDupes(
       this.props.familyAddons,
       this.props.userAddons
     );
@@ -31,9 +31,6 @@ class TodosComponent extends Component {
       if (this.props.addonsInView.length === combinedAddonTitles.length) {
         this.props.removeAddonFromView();
       } else {
-        console.log(
-          "you are in the todoodle component; only pass through the addons that aren't currently showing"
-        );
         this.props.addAddonToView(combinedAddonTitles);
       }
     } else if (this.props.addonsInView.indexOf(title) !== -1) {
@@ -43,10 +40,11 @@ class TodosComponent extends Component {
     }
   }
   render() {
-    const combinedAddonTitles = concatToArray(
+    const combinedAddonTitles = concatToArrayNoDupes(
       this.props.familyAddons,
       this.props.userAddons
     );
+
     const addonsInViewTitlesArray = combinedAddonTitles.map(title =>
       this.props.addonsInView.indexOf(title) !== -1 ? title : null
     );
@@ -80,7 +78,7 @@ class TodosComponent extends Component {
 const mapStateToProps = state => {
   return {
     familyAddons: state.family.familyAddons,
-    userAddons: state.user.Addons,
+    userAddons: state.user.userAddons,
     addonsInView: state.view.addonsInView
   };
 };
