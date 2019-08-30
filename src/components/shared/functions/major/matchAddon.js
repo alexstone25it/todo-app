@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import ShoppingAddon from "../../../pages/todoodle/addons/shopping/ShoppingAddon";
 import RotaAddon from "../../../pages/todoodle/addons/rota/RotaAddon";
@@ -13,8 +13,8 @@ export const matchAddon = addon => {
     case "tasks":
       return <TaskAddon />;
     case undefined:
-      return null;
+      return <Fragment></Fragment>;
     default:
-      console.log("no addons");
+      return null;
   }
 };

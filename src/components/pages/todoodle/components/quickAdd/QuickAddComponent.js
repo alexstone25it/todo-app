@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 
 import { addAddonTargeted } from "../../../../../REDUX/actionCreators/addTodoCreator";
 
+import { concatToArrayNoDupes } from "../../../../shared/functions/minor/minorFuncs";
+
 import DropdownComponent from "../../../../shared/dropdowns/DropdownComponent";
 import SimpleModal from "../../../../shared/modals/SimpleModal";
 import QuickAddTodoForm from "./QuickAddTodoForm";
@@ -36,7 +38,10 @@ class QuickAddComponent extends Component {
     }));
   }
   render() {
-    const addons = Array.from(new Set(this.props.userAddons));
+    const addons = concatToArrayNoDupes(
+      this.props.familyAddons,
+      this.props.userAddons
+    );
     const addonArray = addons.map(addon => (
       <DropdownItem
         key={uuid()}
@@ -69,6 +74,8 @@ class QuickAddComponent extends Component {
 }
 const mapStateToProps = state => {
   return {
+    userAddons: state.user.userAddons,
+    familyAddons: state.family.familyAddons,
     addonTargeted: state.addTodos.addonTargeted
   };
 };

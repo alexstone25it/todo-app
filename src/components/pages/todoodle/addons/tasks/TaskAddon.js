@@ -18,12 +18,16 @@ class TaskAddon extends Component {
     this.taskClicked = this.taskClicked.bind(this);
   }
   makeArray(obj) {
-    return Object.entries(obj).map((item, index) => ({
-      id: index,
-      title: item[0],
-      desc: String(item[1]),
-      done: false
-    }));
+    if (!obj) {
+      return [];
+    } else {
+      return Object.entries(obj).map((item, index) => ({
+        id: index,
+        title: item[0],
+        desc: String(item[1]),
+        done: false
+      }));
+    }
   }
   taskClicked(id, value) {
     switch (value) {
@@ -72,19 +76,28 @@ class TaskAddon extends Component {
       tasks: prevState.tasks.filter(task => (task.id !== id ? task : null))
     }));
   }
+  generateListNum(prop) {
+    if (prop !== undefined) {
+      return Object.keys(prop).length;
+    } else {
+      return -1;
+    }
+  }
+  generateTaskList(arr) {
+    if (arr.length > 0) {
+      return arr.map(task => (
+        <Task key={uuid()} taskInfo={task} taskClicked={this.taskClicked} />
+      ));
+    }
+  }
   render() {
     const listTitle = "Tasks";
     const leftTitle = this.props.username;
     const rightTitle = "family";
-    const leftListNum = Object.keys(this.props.userTasks).length;
-    const rightListNum = Object.keys(this.props.familyTasks).length;
-
-    const taskListLeft = this.state.userTasksArray.map(task => (
-      <Task key={uuid()} taskInfo={task} taskClicked={this.taskClicked} />
-    ));
-    const taskListRight = this.state.familyTasksArray.map(task => (
-      <Task key={uuid()} taskInfo={task} taskClicked={this.taskClicked} />
-    ));
+    const leftListNum = this.generateListNum(this.props.userTasks);
+    const rightListNum = this.generateListNum(this.props.familyTasks);
+    const leftTaskList = this.generateTaskList(this.state.userTasksArray);
+    const rightTaskList = this.generateTaskList(this.state.familyTasksArray);
     return (
       <AccordionRotateWrapper
         listTitle={listTitle}
@@ -92,8 +105,8 @@ class TaskAddon extends Component {
         rightTitle={rightTitle}
         leftListNum={leftListNum}
         rightListNum={rightListNum}
-        leftList={taskListLeft}
-        rightList={taskListRight}
+        leftList={leftTaskList}
+        rightList={rightTaskList}
       ></AccordionRotateWrapper>
     );
   }

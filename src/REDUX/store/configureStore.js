@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 
 import { userReducer } from "../reducers/userReducer";
 import { familyReducer } from "../reducers/familyReducer";
+import { viewReducer } from "../reducers/viewReducer";
 import { addTodoReducer } from "../reducers/addTodoReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
   family: familyReducer,
+  view: viewReducer,
   addTodos: addTodoReducer
 });
 

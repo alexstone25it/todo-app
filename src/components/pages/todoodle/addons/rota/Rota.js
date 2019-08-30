@@ -12,6 +12,11 @@ class Rota extends Component {
     };
     this.toggleAccordionHandler = this.toggleAccordionHandler.bind(this);
   }
+  onClickHandler(event) {
+    const value = event.target.value;
+    const id = this.props.taskInfo.id;
+    this.props.taskClicked(id, value);
+  }
   toggleAccordionHandler() {
     this.setState(prevState => ({
       ...prevState,

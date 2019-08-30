@@ -6,19 +6,16 @@ import { connect } from "react-redux";
 
 import "./App.css";
 
-import MainComponent from "./components/pages/main/MainComponent";
+import TodoodlesContainer from "./components/pages/main/TodoodlesContainer";
 import LandingPage from "./components/pages/landing/LandingPage";
 
 class App extends Component {
   render() {
-    console.log(
-      "you are completing the shoppingform in the quick add component, you have to press the buttons twice so there is a problem in the accordion rotate wrapper"
-    );
     return (
       <BrowserRouter>
         <div className="App">
           {this.props.userAuth && this.props.familyAuth ? (
-            <MainComponent />
+            <TodoodlesContainer />
           ) : (
             <LandingPage />
           )}
