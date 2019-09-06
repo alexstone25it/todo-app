@@ -3,7 +3,7 @@ import { ADD_ADDON_TARGETED } from "../actionTypes";
 const initialState = {
   addonTargeted: ""
 };
-export const addTodoReducer = (state = initialState, action) => {
+export const addonTargetedReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ADDON_TARGETED:
       return {

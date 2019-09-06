@@ -41,9 +41,9 @@ const mapStateToProps = state => {
     username: state.user.username,
     familyname: state.family.familyname,
     userAddons: state.user.userAddons,
-    userLoading: state.user.isLoading,
+    userLoading: state.user.userDataLoading,
     familyAddons: state.family.familyAddons,
-    familyLoading: state.family.isLoading
+    familyLoading: state.family.familyDataLoading
   };
 };
 export default connect(

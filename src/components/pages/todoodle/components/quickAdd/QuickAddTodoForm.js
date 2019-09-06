@@ -37,7 +37,7 @@ class QuickAddTodoForm extends Component {
 }
 const mapStateToProps = state => {
   return {
-    addonTargeted: state.addTodos.addonTargeted
+    addonTargeted: state.addonTargeted.addonTargeted
   };
 };
 export default connect(

@@ -52,7 +52,7 @@ class TodosComponent extends Component {
 const mapStateToProps = state => {
   return {
     familyAddons: state.family.familyAddons,
-    userAddons: state.user.Addons
+    userAddons: state.user.userAddons
   };
 };
 export default connect(

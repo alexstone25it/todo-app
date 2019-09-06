@@ -4,7 +4,7 @@ import { Row, DropdownItem } from "reactstrap";
 
 import { connect } from "react-redux";
 
-import { addAddonTargeted } from "../../../../../REDUX/actionCreators/addTodoCreator";
+import { addAddonTargeted } from "../../../../../REDUX/actionCreators/addonTargetedCreator";
 
 import { concatToArrayNoDupes } from "../../../../shared/functions/minor/minorFuncs";
 
@@ -76,7 +76,7 @@ const mapStateToProps = state => {
   return {
     userAddons: state.user.userAddons,
     familyAddons: state.family.familyAddons,
-    addonTargeted: state.addTodos.addonTargeted
+    addonTargeted: state.addonTargeted.addonTargeted
   };
 };
 const mapDispatchToProps = {

@@ -17,11 +17,7 @@ class ShoppingAddon extends Component {
       userShoppingArray: this.makeArray(this.props.userShopping),
       familyShoppingArray: this.makeArray(this.props.familyShopping)
     };
-    this.toggleAddon = this.toggleAddon.bind(this);
     this.strikeItemHandler = this.strikeItemHandler.bind(this);
-  }
-  toggleAddon() {
-    this.props.toggleAddons("shopping");
   }
   strikeItemHandler(evt) {
     const val = evt.target.value;
@@ -88,18 +84,6 @@ class ShoppingAddon extends Component {
     ));
     return (
       <Fragment>
-        <NavItem>
-          <NavLink
-            className="App__button Button--small"
-            onClick={this.toggleAddon}
-          >
-            <header>
-              <h3 className="m-0" style={{ fontSize: "1.2rem" }}>
-                {listTitle} <SmallBadge>1</SmallBadge>
-              </h3>
-            </header>
-          </NavLink>
-        </NavItem>
         <AccordionRotateWrapper
           listTitle={listTitle}
           leftTitle={leftTitle}
@@ -117,8 +101,7 @@ const mapStateToProps = state => {
   return {
     username: state.user.username,
     familyShopping: state.family.familyShopping,
-    userShopping: state.user.userShopping,
-    familyRota: state.family.familyRota
+    userShopping: state.user.userShopping
   };
 };
 export default connect(

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { fetchUserData } from "../../../REDUX/actionCreators/userCreator";
-import { fetchFamilyData } from "../../../REDUX/actionCreators/familyCreator";
+import { userFetchData } from "../../../REDUX/actionCreators/userCreator";
+import { familyFetchData } from "../../../REDUX/actionCreators/familyCreator";
 
 import "./LandingPage.css";
 
@@ -26,27 +26,18 @@ class LandingPage extends Component {
   onInputHandler(event) {
     const target = event.target.id;
     const value = event.target.value;
-    if (target === "username") {
-      this.setState(prevState => ({
-        ...prevState,
-        username: value
-      }));
-    } else if (target === "familyname") {
-      this.setState(prevState => ({
-        ...prevState,
-        familyname: value
-      }));
-    } else if (target === "password") {
-      console.log("do password stuff");
-    }
+    this.setState(prevState => ({
+      ...prevState,
+      [target]: value
+    }));
   }
   onSubmitHandler(event) {
     event.preventDefault();
     const username = this.state.username.toLowerCase();
     const familyname = this.state.familyname.toLowerCase();
     const password = this.state.password;
-    this.props.fetchFamilyData(familyname);
-    this.props.fetchUserData(familyname, username);
+    this.props.familyFetchData(familyname);
+    this.props.userFetchData(familyname, username);
   }
   render() {
     return (
@@ -73,8 +64,8 @@ class LandingPage extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchUserData,
-  fetchFamilyData
+  userFetchData,
+  familyFetchData
 };
 export default connect(
   null,

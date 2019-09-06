@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 import { FormGroup, Label, Input, Button } from "reactstrap";
-import { addTodoReducer } from "../../REDUX/reducers/addTodoReducer";
 
 class AddShoppingForm extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class AddShoppingForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    addonTargeted: state.addTodos.addonTargeted
+    addonTargeted: state.addonTargeted.addonTargeted
   };
 };
 export default connect(

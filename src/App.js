@@ -14,11 +14,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          {this.props.userAuth && this.props.familyAuth ? (
-            <TodoodlesContainer />
-          ) : (
-            <LandingPage />
-          )}
+          {this.props.userAuth ? <TodoodlesContainer /> : <LandingPage />}
         </div>
       </BrowserRouter>
     );
@@ -26,8 +22,7 @@ class App extends Component {
 }
 const mapStateToProps = state => {
   return {
-    userAuth: state.user.userAuth,
-    familyAuth: state.family.familyAuth
+    userAuth: state.user.userAuth
   };
 };
 export default connect(mapStateToProps)(App);
